@@ -5,12 +5,12 @@
 #include "Keyboard.h"
 #include "Wire.h"
 
-#define LEFT_THRESHHOLD          -5500
-#define LEFT_THRESHHOLD_RELEASE  -5000
-#define RIGHT_THRESHHOLD          5500
-#define RIGHT_THRESHHOLD_RELEASE  5000
-#define SPEED_TRESHHOLD          -6000
-#define SLOW_THRESHHOLD          1000
+#define LEFT_THRESHOLD          -5500
+#define LEFT_THRESHOLD_RELEASE  -5000
+#define RIGHT_THRESHOLD          5500
+#define RIGHT_THRESHOLD_RELEASE  5000
+#define SPEED_THRESHOLD         -6000
+#define SLOW_THRESHOLD           1000
 
 MPU6050 accelgyro;  // I2C address is 0x68
 int16_t ax, ay, az, gx, gy, gz;
@@ -46,21 +46,21 @@ void loop() {
 
 void perform_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy, int16_t gz) {
     // Trigger keypresses in case helmet is tilted to left, right, front, or back.
-    if (ay <  LEFT_THRESHHOLD) {
+    if (ay <  LEFT_THRESHOLD) {
         Keyboard.press(KEY_LEFT_ARROW);
         Serial.println("Moving Left");
         TXLED1;  // turn on onboard LED
     }
-    else if (ay > RIGHT_THRESHHOLD) {
+    else if (ay > RIGHT_THRESHOLD) {
         Keyboard.press(KEY_RIGHT_ARROW);
         Serial.println("Moving Right");
         TXLED1;  // turn on onboard LED
     }
-    if (ax < SPEED_TRESHHOLD) {
+    if (ax < SPEED_THRESHOLD) {
         Keyboard.press(KEY_LEFT_SHIFT);
         //Serial.println("Speeding");
     }
-    else if (ax > SLOW_THRESHHOLD) {
+    else if (ax > SLOW_THRESHOLD) {
         Keyboard.press(KEY_LEFT_CTRL);
         Serial.println("Slowing down");
     }
@@ -68,13 +68,13 @@ void perform_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy
 
 void release_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy, int16_t gz) {
     // release pressed keys when tilt back in normal range
-    if (ay > LEFT_THRESHHOLD_RELEASE && ay < RIGHT_THRESHHOLD_RELEASE) {
+    if (ay > LEFT_THRESHOLD_RELEASE && ay < RIGHT_THRESHOLD_RELEASE) {
         Keyboard.release(KEY_RIGHT_ARROW);
         Keyboard.release(KEY_LEFT_ARROW);
         //Serial.println("Release Y");
         TXLED0; // turn off onboard LED
     }
-    if (ax > SPEED_TRESHHOLD && ax < SLOW_THRESHHOLD) {
+    if (ax > SPEED_THRESHOLD && ax < SLOW_THRESHOLD) {
         Keyboard.release(KEY_LEFT_SHIFT);
         Keyboard.release(KEY_LEFT_CTRL);
         //Serial.println("Release X");
