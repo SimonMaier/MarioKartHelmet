@@ -5,9 +5,7 @@
 #include "Keyboard.h"
 #include "Wire.h"
 
-#define LED_PIN 13
-bool blinkState = false;
-
+#define LED_PIN 17
 #define LEFT_THRESHHOLD          -7000
 #define LEFT_THRESHHOLD_RELEASE  -6500
 #define RIGHT_THRESHHOLD          7000
@@ -53,12 +51,12 @@ void perform_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy
     if (ay <  LEFT_THRESHHOLD) {
         Keyboard.press(KEY_LEFT_ARROW);
         Serial.println("Moving Left");
-        digitalWrite(LED_PIN, 1);
+        digitalWrite(LED_PIN, HIGH);
     }
     else if (ay > RIGHT_THRESHHOLD) {
         Keyboard.press(KEY_RIGHT_ARROW);
         Serial.println("Moving Right");
-        digitalWrite(LED_PIN, 1);
+        digitalWrite(LED_PIN, HIGH);
     }
     if (ax < SPEED_TRESHHOLD) {
         Keyboard.press(KEY_LEFT_SHIFT);
@@ -76,7 +74,7 @@ void release_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy
         Keyboard.release(KEY_RIGHT_ARROW);
         Keyboard.release(KEY_LEFT_ARROW);
         Serial.println("Release Y");
-        digitalWrite(LED_PIN, 0);
+        digitalWrite(LED_PIN, LOW);
     }
     if (ax > SPEED_TRESHHOLD && ax < SLOW_THRESHHOLD) {
         Keyboard.release(KEY_LEFT_SHIFT);
