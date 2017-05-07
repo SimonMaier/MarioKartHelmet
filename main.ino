@@ -63,15 +63,14 @@ int16_t gx, gy, gz;
 // for a human.
 //#define OUTPUT_BINARY_ACCELGYRO
 
-
+#include <Keyboard.h>
 #define LED_PIN 13
 bool blinkState = false;
 
-char TURN_LEFT = 'w';
-char TURN_RIGHT = 'w';
-char SPEED_UP = 'x';
-char SLOW_DOWN = 'x';
-
+int LEFT_THRESHHOLD = -6000;
+int RIGHT_THRESHHOLD = 6000;
+int SPEED_TRESHHOLD = - 6000;
+int SLOW_THRESHHOLD = 4000;
 
 
 void setup() {
@@ -161,26 +160,33 @@ void loop() {
 
 void perform_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy, int16_t gz) {
     // check if the helmet is tilted to the left
-    if ( ay < -6000 ) {
+    if ( ay <  LEFT_THRESHHOLD) {
         Keyboard.press(KEY_LEFT_ARROW);
-        Serial.println("LEFT");
       }
     // check if the helmet is tilted to the right
-    else if ( ay > 6000 ) {
+    else if ( ay > RIGHT_THRESHHOLD ) {
         Keyboard.press(KEY_RIGHT_ARROW);
-        Serial.println("RIGHT");
       }
       
-    // speed up if the helmet is tilted to the front
-    if ( ax < -6000 ) {
+    // Speed up if the helmet is tilted to the front
+    if ( ax < SPEED_TRESHHOLD ) {
         Keyboard.press(KEY_UP_ARROW);
-        Serial.println("SPEED");
       }
-    // slow down if the helmet is tilted to the back
-    else if ( ax > 4000 ) {
+    else if ( ax > SLOW_THRESHHOLD ) {
         Keyboard.press(KEY_DOWN_ARROW);
-        Serial.println("SLOW");
       }
   }
 
-void releaseKeys(key1, key2, key3)
+void reset_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy, int16_t gz) {
+    // check if the speed has to be reset
+    if ( ay > LEFT_THRESHHOLD && ay > RIGHT_THRESHHOLD){
+        Keyboard.release(KEY_LEFT_ARROW);
+        Keyboard.release(KEY_RIGHT_ARROW);
+      }
+    if ( ax > SPEED_TRESHHOLD && ax > SPEED_TRESHHOLD ) {
+        Keyboard.release(KEY_UP_ARROW);
+        Keyboard.release(KEY_DOWN_ARROW);
+      }
+  }
+
+  
