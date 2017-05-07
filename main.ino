@@ -45,9 +45,6 @@ void loop() {
     Serial.print(gx); Serial.print("\t");
     Serial.print(gy); Serial.print("\t");
     Serial.println(gz);
-
-    blinkState = !blinkState;
-    digitalWrite(LED_PIN, blinkState);
 }
 
 
@@ -56,10 +53,12 @@ void perform_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy
     if (ay <  LEFT_THRESHHOLD) {
         Keyboard.press(KEY_LEFT_ARROW);
         Serial.println("Moving Left");
+        digitalWrite(LED_PIN, 1);
     }
     else if (ay > RIGHT_THRESHHOLD) {
         Keyboard.press(KEY_RIGHT_ARROW);
         Serial.println("Moving Right");
+        digitalWrite(LED_PIN, 1);
     }
     if (ax < SPEED_TRESHHOLD) {
         Keyboard.press(KEY_LEFT_SHIFT);
@@ -77,6 +76,7 @@ void release_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy
         Keyboard.release(KEY_RIGHT_ARROW);
         Keyboard.release(KEY_LEFT_ARROW);
         Serial.println("Release Y");
+        digitalWrite(LED_PIN, 0);
     }
     if (ax > SPEED_TRESHHOLD && ax < SLOW_THRESHHOLD) {
         Keyboard.release(KEY_LEFT_SHIFT);
