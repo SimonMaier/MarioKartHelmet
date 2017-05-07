@@ -30,7 +30,7 @@ void loop() {
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
     // trigger keypresses according to the sensor values
-    perform_controls(ax, ay, az, gx, gy, gz);
+    press_controls(ax, ay, az, gx, gy, gz);
     release_controls(ax, ay, az, gx, gy, gz);
     shoot_item(gx, gy, gz);
 
@@ -44,7 +44,7 @@ void loop() {
 }
 
 
-void perform_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy, int16_t gz) {
+void press_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy, int16_t gz) {
     // Trigger keypresses in case helmet is tilted to left, right, front, or back.
     if (ay <  LEFT_THRESHOLD) {
         Keyboard.press(KEY_LEFT_ARROW);
