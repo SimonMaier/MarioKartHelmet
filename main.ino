@@ -5,19 +5,17 @@
 #include "Keyboard.h"
 #include "Wire.h"
 
-#define LED_PIN 17
-#define LEFT_THRESHHOLD          -7000
-#define LEFT_THRESHHOLD_RELEASE  -6500
-#define RIGHT_THRESHHOLD          7000
-#define RIGHT_THRESHHOLD_RELEASE  6500
+#define LEFT_THRESHHOLD          -5500
+#define LEFT_THRESHHOLD_RELEASE  -5000
+#define RIGHT_THRESHHOLD          5500
+#define RIGHT_THRESHHOLD_RELEASE  5000
 #define SPEED_TRESHHOLD          -6000
-#define SLOW_THRESHHOLD          -2000
+#define SLOW_THRESHHOLD          1000
 
 MPU6050 accelgyro;  // I2C address is 0x68
 int16_t ax, ay, az, gx, gy, gz;
 
 void setup() {
-    pinMode(LED_PIN, OUTPUT);
     Wire.begin();
     Keyboard.begin();
     accelgyro.initialize();
@@ -36,13 +34,13 @@ void loop() {
     release_controls(ax, ay, az, gx, gy, gz);
     shoot_item(gx, gy, gz);
 
-    Serial.print("a/g:\t");
+/*  Serial.print("a/g:\t");
     Serial.print(ax); Serial.print("\t");
     Serial.print(ay); Serial.print("\t");
     Serial.print(az); Serial.print("\t");
     Serial.print(gx); Serial.print("\t");
     Serial.print(gy); Serial.print("\t");
-    Serial.println(gz);
+    Serial.println(gz);*/
 }
 
 
@@ -51,16 +49,16 @@ void perform_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy
     if (ay <  LEFT_THRESHHOLD) {
         Keyboard.press(KEY_LEFT_ARROW);
         Serial.println("Moving Left");
-        digitalWrite(LED_PIN, HIGH);
+        TXLED1;  // turn on onboard LED
     }
     else if (ay > RIGHT_THRESHHOLD) {
         Keyboard.press(KEY_RIGHT_ARROW);
         Serial.println("Moving Right");
-        digitalWrite(LED_PIN, HIGH);
+        TXLED1;  // turn on onboard LED
     }
     if (ax < SPEED_TRESHHOLD) {
         Keyboard.press(KEY_LEFT_SHIFT);
-        Serial.println("Speeding");
+        //Serial.println("Speeding");
     }
     else if (ax > SLOW_THRESHHOLD) {
         Keyboard.press(KEY_LEFT_CTRL);
@@ -73,13 +71,13 @@ void release_controls(int16_t ax, int16_t ay, int16_t az, int16_t gx, int16_t gy
     if (ay > LEFT_THRESHHOLD_RELEASE && ay < RIGHT_THRESHHOLD_RELEASE) {
         Keyboard.release(KEY_RIGHT_ARROW);
         Keyboard.release(KEY_LEFT_ARROW);
-        Serial.println("Release Y");
-        digitalWrite(LED_PIN, LOW);
+        //Serial.println("Release Y");
+        TXLED0; // turn off onboard LED
     }
     if (ax > SPEED_TRESHHOLD && ax < SLOW_THRESHHOLD) {
         Keyboard.release(KEY_LEFT_SHIFT);
         Keyboard.release(KEY_LEFT_CTRL);
-        Serial.println("Release X");
+        //Serial.println("Release X");
     }
 }
 
