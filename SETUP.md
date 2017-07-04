@@ -2,14 +2,14 @@
 
 You can build your own IMU Joystick in about 2h for less than 5€, by following the instructions below.
 
-## 1. Get the hardware components
+### 1. Get the hardware components
   - Arduino Pro Micro
   - GY-521 board (breakout for MPU6050)
   - breadboard
   - some wire
-## 2. Assemble the hardware
+### 2. Assemble the hardware
 Mount pin headers, place parts & wire on breadboard according to fritzing image.
-## 3. Get the software components
+### 3. Get the software components
 - [Arduino IDE (>=1.6.6)](https://www.arduino.cc/en/main/software)
 - external Arduino libraries:
   - [i2cdevlib](https://github.com/jrowberg/i2cdevlib)
@@ -20,9 +20,9 @@ Mount pin headers, place parts & wire on breadboard according to fritzing image.
 
     Copy the folder `ArduinoJoystickLibrary/Joystick` to your Arduino libraries directory.
 - our Arduino code.
-## 4. Upload the software
-## 5. Test the Joystick
-## 6. Enjoy!
+### 4. Upload the software
+### 5. Test the Joystick
+### 6. Enjoy!
 
 # How to play *Mario Kart 64* with your IMU Joystick on ArchLinux
   - Step 1: `~# pacman -S mupen64plus`
