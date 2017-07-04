@@ -4,8 +4,7 @@
 //#include "MPU6050.h"
 #include "Joystick.h"
 
-
-// #define DEBUG_OUTPUT  // use to receive serial debug output
+#define DEBUG_OUTPUT  // use to receive serial debug output
 #define JOYSTICK_MODE  // use to actually emulate a joystick, may be removed for debugging
 
 #define INTERRUPT_PIN 7
@@ -177,8 +176,21 @@ void loop() {
               Joystick.releaseButton(8);
             }
 
-            // TODO detect jumping
-            if (ypr[1]*512/M_PI < -150) {  // Shoot?
+            // Detect Jumping
+            // compute world-frame acceleration, adjusted to remove gravity
+            // and rotated based on known orientation
+            mpu.dmpGetAccel(&aa, fifoBuffer);
+            mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+            mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
+            #ifdef DEBUG_OUTPUT
+                Serial.print("acceleration\t");
+                Serial.print(aaWorld.x);
+                Serial.print("\t");
+                Serial.print(aaWorld.y);
+                Serial.print("\t");
+                Serial.println(aaWorld.z);
+            #endif
+            if (abs(aaWorld.z) > 3000) {  // Shoot?
               Joystick.pressButton(7);
             } else {
               Joystick.releaseButton(7);
