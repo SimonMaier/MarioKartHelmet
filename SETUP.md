@@ -1,19 +1,26 @@
 # Introduction:
 ### What is Mario-Helmet?
 
-
+This Arduino Mario-Helmet project is designed for of playing Mario Kart with an interactive helmet controller rather than a traditional control handle. By turning the head, the user can simply control the direction and speed of the kart. Physically “Jump” can trigger the weapon system to shoot Red Koopa Shell or use other weapons. The player can also put his/her hand on the side of the helmet to drift the kart. In short, it is an easy-to-build and low-cost Arduino game controller project which brings the users a different game experience.
 
 # How to build an IMU Joystick yourself
 
 You can build your own IMU Joystick in about 2h for less than 5€, by following the instructions below.
 
 ### 1. Get the hardware components
+  - Helmet (Polylon hat is a good choice) 
+  - Gyroscope (MPU6050 - GG521)
+  - Ultrasonic Ranging Sensor (HC - SR04)
   - Arduino Pro Micro
-  - GY-521 board (breakout for MPU6050)
-  - breadboard
-  - some wire
+  - Tiny Bread Board
+  - USB cable (1m ~ 2m)
+
+What are the compnents for?
+The main components needed for this projects are Arduino Pro Micro, Tiny Breadboard, Gyroscope (MPU6050 - GG521) and Ultrasonic Ranging Sensor (HC - SR04). MPU6050 is a 3-Axis Gyroscope and Accelerometer, which is used for detecting the axis change of player’s head movement to control the direction and the acceleration of jump to launch the weapon. HC-SR04 can determine the distance to an object like bats or dolphins do, it offers great non-contact range detection for the feature of putting the hand on the side of the helmet to drift.
+
 ### 2. Assemble the hardware
 Mount pin headers, place parts & wire on breadboard according to fritzing image.
+
 ### 3. Get the software components
 - [Arduino IDE (>=1.6.6)](https://www.arduino.cc/en/main/software)
 - external Arduino libraries:
