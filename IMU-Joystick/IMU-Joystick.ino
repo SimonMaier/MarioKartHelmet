@@ -4,14 +4,17 @@
 //#include "MPU6050.h"
 #include "Joystick.h"
 
-#define DEBUG_OUTPUT  // use to receive serial debug output
-#define JOYSTICK_MODE  // use to actually emulate a joystick, may be removed for debugging
+//#define DEBUG_OUTPUT  // use to receive serial debug output
+#define JOYSTICK_MODE   // activates IMU Joystick control
+//#define ULTRASONIC_MODE // activates ultrasonic drift control
 
 #define INTERRUPT_PIN 7
 #define BUTTON_PIN A0
 
-#define trigger 4 // Arduino Pin an HC-SR04 Trig
-#define echo 5    // Arduino Pin an HC-SR04 Echo
+#define trigger 4         // HC-SR04 Trig Pin
+#define echo 5            // HC-SR04 Echo Pin
+#define trigger_offset 10 // Define the offset for the ultrasonic-sensor (in cm.). 
+bool driftButtonPressed = false;
 
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,
@@ -51,9 +54,11 @@ void setup() {
   Wire.begin();
   Wire.setClock(400000); // 400kHz I2C clock.
 
-  pinMode(trigger, OUTPUT); // Set up trigger pin for the ultrasonic-sensor.
-  pinMode(echo, INPUT); // Set up echo pin for the ultrasonic-sensor.
-  digitalWrite(trigger, HIGH); //Shut down ultrasonic signal.
+  #ifdef ULTRASONIC_MODE
+      pinMode(trigger, OUTPUT);    // Set up trigger pin for the ultrasonic-sensor.
+      pinMode(echo, INPUT);        // Set up echo pin for the ultrasonic-sensor.
+      digitalWrite(trigger, HIGH); // Shut down ultrasonic signal.
+  #endif
   
   mpu.initialize();
 
@@ -103,7 +108,7 @@ void setup() {
 void loop() {
     if (!dmpReady) fail();
     
-    // calibration button handling
+    /////// PART 1: calibration button handling
     if (digitalRead(A0) == LOW && !startPressed) {
       calibrate_mpu(); // recompute offsets
       
@@ -115,22 +120,24 @@ void loop() {
       Joystick.sendState();
       startPressed = false;
     }
-      
-     int trigger_offset = 10; // Define the offset for the ultrasonic-sensor (in cm.). 
-     
-     // Check wheather the distance of the players hand to the ultrasonic-sensor is lower than the given offset. 
-     if (entfernung < trigger_offset) { 
-      Joystick.pressButton(1); // Press the drift button.
-      Joystick.sendState();  // Update the state of the controller.
-      Serial.print(entfernung)
-     }
 
-     int entfernung=getEntfernung(); // Get the distance of the ultrasonic-sensor to the players hand.     
-     // If the distance is bigger than 10 cm., release the button.
-     else{
-      Joystick.releaseButton(1); 
-      Joystick.sendState(); // Update the state of the controller.
-     }
+    /////// PART 2: Distance sensor
+    #ifdef ULTRASONIC_MODE
+        // Check whether the distance of the players hand to the ultrasonic-sensor is lower than the given offset. 
+        if (getDistance() < trigger_offset) { 
+          #ifdef DEBUG_OUTPUT
+                Serial.println("Pressing drift button (1)");
+          #endif
+          Joystick.pressButton(1); 
+          Joystick.sendState();
+          driftButtonPressed = true;
+          
+        } else if (driftButtonPressed) {
+          Joystick.releaseButton(1); 
+          Joystick.sendState();
+          driftButtonPressed = false;
+        }
+    #endif
 
     // wait for MPU interrupt or extra packet(s) available
     while (!mpuInterrupt && fifoCount < packetSize) { }
@@ -140,14 +147,8 @@ void loop() {
     mpuIntStatus = mpu.getIntStatus();
     fifoCount = mpu.getFIFOCount();
 
-    // check for FIFO overflow (this should never happen unless our code is too inefficient)
-    if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
-        mpu.resetFIFO();
-        #ifdef DEBUG_OUTPUT
-            Serial.println("FIFO overflow!");
-        #endif
-    // otherwise, check for DMP data ready interrupt (this should happen frequently)
-    } else if (mpuIntStatus & 0x02) {
+    // check for DMP data ready interrupt (this should happen frequently)
+    if (mpuIntStatus & 0x02) {
         // wait for correct available data length, should be a VERY short wait
         while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
 
@@ -184,17 +185,16 @@ void loop() {
               Y Axis = axis(1-,1+)
               X Axis = axis(0-,0+)
             ************************************/
-            Joystick.setXAxis((int)(-ypr[2]*1024/M_PI*2)); // *2 means that max value is achieved
-            Joystick.setYAxis((int)( ypr[1]*1024/M_PI  )); // at around 45° tilt instead of 90°.
+            Joystick.setXAxis((int)(ypr[2]*1024/M_PI*2)); // *2 means that max value is achieved
+            Joystick.setYAxis((int)(ypr[1]*1024/M_PI  )); // at around 45° tilt instead of 90°.
 
-            
-            if (ypr[1]*512/M_PI > -50) {  // Accelerate?
+            if (ypr[1]*1024/M_PI > -350) {  // Accelerate?
               Joystick.pressButton(6);
             } else {
               Joystick.releaseButton(6);
             }  
             
-            if (ypr[1]*512/M_PI < -150) {  // Brake?
+            if (ypr[1]*512/M_PI < -500) {  // Brake?
               Joystick.pressButton(8);
             } else {
               Joystick.releaseButton(8);
@@ -220,18 +220,25 @@ void loop() {
               Joystick.releaseButton(7);
             }
         
-            Joystick.sendState(); // -- this is so slow that it causes FIFO overflows. (about 1 per call)
+            Joystick.sendState(); // -- this is so slow that it causes FIFO overflow.
             #ifdef DEBUG_OUTPUT
                 Serial.println("Joystick data sent.");
             #endif
         #endif
     }
+    // check for FIFO overflow (this should never happen unless our code is too inefficient)
+    if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+        mpu.resetFIFO();
+        #ifdef DEBUG_OUTPUT
+            Serial.println("FIFO overflow!");
+        #endif
+    }
 }
 
 
-void fail(void) {
+void fail() {
   while (1) {
-//    TXLED0;  // maybe triggers button press ISR?
+//    TXLED0;
     RXLED0;
     delay(250);
 //    TXLED1;
@@ -244,9 +251,7 @@ void fail(void) {
 void calibrate_mpu() { }
 
 // Get the distance of the players hand to the ultrasonic-sensor.
-int getEntfernung()
-{
-  // Initialize the variables used for the calculations.
+int getDistance() {
   long distance=0;
   long travel_time=0;
 
