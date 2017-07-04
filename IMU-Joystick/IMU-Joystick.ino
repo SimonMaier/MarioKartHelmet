@@ -10,6 +10,10 @@
 #define INTERRUPT_PIN 7
 #define BUTTON_PIN A0
 
+#define trigger 4 // Arduino Pin an HC-SR04 Trig
+#define echo 5    // Arduino Pin an HC-SR04 Echo
+
+
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,
   JOYSTICK_TYPE_MULTI_AXIS, 10, 0, true, true, false,  // 10 buttons (0,1..9), 2 axes (X,Y)
   false, false, false, false, false, false, false, false); // Nothing else
@@ -46,6 +50,10 @@ bool startPressed = false;
 void setup() {
   Wire.begin();
   Wire.setClock(400000); // 400kHz I2C clock.
+
+  pinMode(trigger, OUTPUT); // Set up trigger pin for the ultrasonic-sensor.
+  pinMode(echo, INPUT); // Set up echo pin for the ultrasonic-sensor.
+  digitalWrite(trigger, HIGH); //Shut down ultrasonic signal.
   
   mpu.initialize();
 
@@ -107,6 +115,22 @@ void loop() {
       Joystick.sendState();
       startPressed = false;
     }
+      
+     int trigger_offset = 10; // Define the offset for the ultrasonic-sensor (in cm.). 
+     
+     // Check wheather the distance of the players hand to the ultrasonic-sensor is lower than the given offset. 
+     if (entfernung < trigger_offset) { 
+      Joystick.pressButton(1); // Press the drift button.
+      Joystick.sendState();  // Update the state of the controller.
+      Serial.print(entfernung)
+     }
+
+     int entfernung=getEntfernung(); // Get the distance of the ultrasonic-sensor to the players hand.     
+     // If the distance is bigger than 10 cm., release the button.
+     else{
+      Joystick.releaseButton(1); 
+      Joystick.sendState(); // Update the state of the controller.
+     }
 
     // wait for MPU interrupt or extra packet(s) available
     while (!mpuInterrupt && fifoCount < packetSize) { }
@@ -218,4 +242,24 @@ void fail(void) {
 
 
 void calibrate_mpu() { }
+
+// Get the distance of the players hand to the ultrasonic-sensor.
+int getEntfernung()
+{
+  // Initialize the variables used for the calculations.
+  long distance=0;
+  long travel_time=0;
+
+  digitalWrite(trigger, LOW); // Reset the trigger pin.
+  delayMicroseconds(3);
+  noInterrupts();
+  digitalWrite(trigger, HIGH); //Trigger Impuls for 10 us
+  delayMicroseconds(10);
+  digitalWrite(trigger, LOW);
+  travel_time = pulseIn(echo, HIGH); // Measure the echo time.
+  interrupts();
+  travel_time = (travel_time/2); // Only use half of the time as it travels two ways.
+  distance = travel_time / 29.1; // Transfer time to cm.
+  return(distance);
+}
 

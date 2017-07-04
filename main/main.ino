@@ -12,6 +12,9 @@
 #define SPEED_THRESHOLD         -6000
 #define SLOW_THRESHOLD           1000
 
+#define trigger 4 // Arduino Pin an HC-SR04 Trig
+#define echo 5    // Arduino Pin an HC-SR04 Echo
+
 MPU6050 accelgyro;  // I2C address is 0x68
 int16_t ax, ay, az, gx, gy, gz;
 
@@ -19,6 +22,10 @@ void setup() {
     Wire.begin();
     Keyboard.begin();
     accelgyro.initialize();
+    
+    pinMode(trigger, OUTPUT);
+    pinMode(echo, INPUT);
+    digitalWrite(trigger, HIGH); //Signal abschalten
 
     Serial.begin(115200);
     Serial.println("Testing I2C connection...");
