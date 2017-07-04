@@ -15,7 +15,7 @@ You can build your own IMU Joystick in about 2h for less than 5€, by following
   - Tiny Bread Board
   - USB cable (1m ~ 2m)
 
-What are the compnents for?
+- What are the compnents for?
 The main components needed for this projects are Arduino Pro Micro, Tiny Breadboard, Gyroscope (MPU6050 - GG521) and Ultrasonic Ranging Sensor (HC - SR04). MPU6050 is a 3-Axis Gyroscope and Accelerometer, which is used for detecting the axis change of player’s head movement to control the direction and the acceleration of jump to launch the weapon. HC-SR04 can determine the distance to an object like bats or dolphins do, it offers great non-contact range detection for the feature of putting the hand on the side of the helmet to drift.
 
 ### 2. Assemble the hardware
@@ -32,8 +32,13 @@ Mount pin headers, place parts & wire on breadboard according to fritzing image.
 
     Copy the folder `ArduinoJoystickLibrary/Joystick` to your Arduino libraries directory.
 - our Arduino code.
+
+    N64 emulation - Mupen64Plus (http://mupen64plus.org/)
+    
 ### 4. Upload the software
-### 5. Test the Joystick
+
+### 5. Test the Joystick (Helmet)
+
 ### 6. Enjoy!
 
 # How to play *Mario Kart 64* with your IMU Joystick on ArchLinux
