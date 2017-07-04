@@ -32,7 +32,7 @@ Mount pin headers, place parts & wire on breadboard according to fritzing image.
     Copy the folder `ArduinoJoystickLibrary/Joystick` to your Arduino libraries directory.
 - our Arduino code.
 
-  - N64 emulation - Mupen64Plus (http://mupen64plus.org/)
+- N64 emulation - Mupen64Plus (http://mupen64plus.org/)
     
 ### 4. Upload the software
 
