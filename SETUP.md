@@ -44,11 +44,14 @@ Solder pin headers, place Pro Micro, GY-521 & wire on breadboard as follows:
 
 ### 6. Enjoy!
 
-# How to play *Mario Kart 64* with your IMU Joystick on ArchLinux
+We recommend that you play some *Mario Kart 64* with your IMU Joystick used as a head tracker (on ArchLinux).
+Do the following steps:
   - Step 1: `~# pacman -S mupen64plus`
   - Step 2: Add controller specification to `/usr/share/mupen64plus/InputAutoCfg.ini` file.
   - Step 3: Legally obtain ROM file for *Mario Kart 64*.
-  - Step 4: `~# mupen64plus --fullscreen --gfx mupen64plus-video-glide64 <location-of-ROM-file.n64>`
+  - Step 4: Connect controller & carefully place it on top of your head
+  - Step 5: `~# mupen64plus --fullscreen --gfx mupen64plus-video-glide64 <location-of-ROM-file.n64>`
+  - Step 6: \o/ Control race cars using your head movements.
 
 # How to *develop* the controller yourself
 
