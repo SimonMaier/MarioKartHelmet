@@ -11,14 +11,15 @@ The Arduino Pro Micro-based controller can be assembled on a breadcoard within 1
 
 # How to build an IMU Joystick yourself
 
-You can build your own IMU Joystick in about 1-2h for less than 5€, by following the instructions below.
+You can build your own IMU Joystick in about 1-2h, by following the instructions below. Except for mounting pin headers, no soldering is required.
 
 ### 1. Get the hardware components
   - [Arduino(-compatible) Pro Micro](https://www.aliexpress.com/item/New-Pro-Micro-for-arduino-ATmega32U4-5V-16MHz-Module-with-2-row-pin-header-For-Leonardo/32773740303.html), any ATmega32U4-based Arduino will do.
   - [GY-521](https://www.aliexpress.com/item/versandkostenfrei-gy-521-mpu-6050-mpu6050-modul-3-achse-analog-Gyro-Sensoren-beschleunigungsmesser-modul/32315092057.html), a low-cost MPU6050 accelerometer + gyroscope.
   - mini-sized [breadboard](https://www.aliexpress.com/item/Mini-Breadboard-Protoboard-DIY-Kit-Universal-Transparent-Solderless-SYB-170-Breadboard-170Tie-points-Prototype-Boards-35X47MM/32717999019.html)
   - (optional) [push buttons](https://www.aliexpress.com/item/100pcs-6-6-5mm-4pin-Quality-Mini-Micro-Momentary-Tactile-Push-Button-Switch/32753141267.html)
-  - some wire
+
+We assume that you have some wire to make breadboard connections.
 
 **Total material cost** as of June 2017: €2,72 Pro Micro + €0.93 GY-521 + €0.80 breadboard = **4.45€**, shipping included.
 
