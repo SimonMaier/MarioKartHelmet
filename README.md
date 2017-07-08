@@ -20,7 +20,7 @@ The main components needed for this projects are Arduino Pro Micro, Tiny Breadbo
 ### 2. Assemble the hardware
 Solder pin headers, place Pro Micro, GY-521 & wire on breadboard as follows:
 <p align="center">
-  <img src="http://chrisittner.de/breadboard.png" title="Breadboard Assembly" />
+  <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/IMU-Joystick/schematics/IMU-Joystick_bb.png" title="Breadboard Assembly" />
 </p>
 
 
