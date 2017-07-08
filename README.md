@@ -3,22 +3,27 @@
 
 This Arduino Mario-Helmet project is designed for of playing Mario Kart with an interactive helmet controller rather than a traditional control handle. By turning the head, the user can simply control the direction and speed of the kart. Physically “Jump” can trigger the weapon system to shoot Red Koopa Shell or use other weapons. The player can also put his/her hand on the side of the helmet to drift the kart. In short, it is an easy-to-build and low-cost Arduino game controller project which brings the users a different game experience.
 
+The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Windows, Mac, and Linux, without further software:
+
+<p align="center">
+  <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/IMU-Joystick/schematics/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
+</p>
 
 # How to build an IMU Joystick yourself
 
-You can build your own IMU Joystick in about 2h for less than 5€, by following the instructions below.
+You can build your own IMU Joystick in about 1-2h for less than 5€, by following the instructions below.
 
 ### 1. Get the hardware components
   - [Arduino(-compatible) Pro Micro](https://www.aliexpress.com/item/New-Pro-Micro-for-arduino-ATmega32U4-5V-16MHz-Module-with-2-row-pin-header-For-Leonardo/32773740303.html), any ATmega32U4-based Arduino will do.
   - [GY-521](https://www.aliexpress.com/item/versandkostenfrei-gy-521-mpu-6050-mpu6050-modul-3-achse-analog-Gyro-Sensoren-beschleunigungsmesser-modul/32315092057.html), a low-cost MPU6050 accelerometer + gyroscope.
-  - mini-sized [bread board](https://www.aliexpress.com/item/Mini-Breadboard-Protoboard-DIY-Kit-Universal-Transparent-Solderless-SYB-170-Breadboard-170Tie-points-Prototype-Boards-35X47MM/32717999019.html)
+  - mini-sized [breadboard](https://www.aliexpress.com/item/Mini-Breadboard-Protoboard-DIY-Kit-Universal-Transparent-Solderless-SYB-170-Breadboard-170Tie-points-Prototype-Boards-35X47MM/32717999019.html)
   - (optional) [push buttons](https://www.aliexpress.com/item/100pcs-6-6-5mm-4pin-Quality-Mini-Micro-Momentary-Tactile-Push-Button-Switch/32753141267.html)
   - some wire
 
-**Total material cost** as of June 2017: €2,72 Pro Micro + €0.93 GY-521 + €0.80 bread board = **4.45€**, shipping included.
+**Total material cost** as of June 2017: €2,72 Pro Micro + €0.93 GY-521 + €0.80 breadboard = **4.45€**, shipping included.
 
 ### 2. Assemble the hardware
-Solder pin headers where needed; Place Pro Micro, GY-521 & wire on bread board as follows:
+Solder pin headers where needed; Place Pro Micro, GY-521 & wire on breadboard as follows:
 <p align="center">
   <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/IMU-Joystick/schematics/IMU-Joystick_bb.png" title="Breadboard Assembly" />
 </p>
