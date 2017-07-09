@@ -1,15 +1,17 @@
 
 # IMU-Joystick
 
-**An easy-to-build DIY game controller for PCs, based on an Arduino Pro Micro and the MPU6050 accelerometer & gyroscope.**
+**A configurable DIY USB game controller, based on an Arduino Pro Micro and the MPU6050 accelerometer & gyroscope.** 
 
-The project includes an example section. In particular, `examples/MarioKartHelmet/` demonstrates how to set up an IMU-Joystick as a head-mounted game controller for Mario Kart 64 or Mario Kart Double Dash. It allows karts to be controlled be head movements and items triggered by jumping, thus bringing a highly interactive game experience to what is already a great party game.
+:video_game:
 
-The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
+For tested applications check out the `example`  section. In particular, `examples/MarioKartHelmet/` demonstrates how to set up  IMU-Joystick as a head-mounted game controller for Mario Kart 64 or Mario Kart Double Dash. It allows karts to be controlled through head movements and items triggered via jumping. After a lot of playing, we can assure that it brings a highly immersive game experience to what is already a great party game :tada:.
 
 <p align="center">
   <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/examples/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
 </p>
+
+The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
 
 # How to build an IMU Joystick yourself
 
@@ -41,7 +43,6 @@ Note that Pro Micro pins `8` and `9` do not need to connect to the IMU.
   - [ArduinoJoystickLibrary (>=2.0)](https://github.com/MHeironimus/ArduinoJoystickLibrary)
     Copy the folder `ArduinoJoystickLibrary/Joystick` to your Arduino libraries directory.
 - our Arduino code.
-- N64 emulation - Mupen64Plus (http://mupen64plus.org/)
     
 ### 4. Upload the software
 
