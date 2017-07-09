@@ -1,12 +1,14 @@
-# Introduction:
-### What is Mario-Helmet?
 
-This Arduino Mario-Helmet project is designed for of playing Mario Kart with an interactive helmet controller rather than a traditional control handle. By turning the head, the user can simply control the direction and speed of the kart. Physically “Jump” can trigger the weapon system to shoot Red Koopa Shell or use other weapons. The player can also put his/her hand on the side of the helmet to drift the kart. In short, it is an easy-to-build and low-cost Arduino game controller project which brings the users a different game experience.
+# IMU-Joystick
 
-The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Windows, Mac, and Linux, without further software:
+**An easy-to-build DIY game controller for PCs, based on an Arduino Pro Micro and the MPU6050 accelerometer & gyroscope.**
+
+The project includes an example section. In particular, `examples/MarioKartHelmet/` demonstrates how to set up an IMU-Joystick as a head-mounted game controller for Mario Kart 64 or Mario Kart Double Dash. It allows karts to be controlled be head movements and items triggered by jumping, thus bringing a highly interactive game experience to what is already a great party game.
+
+The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
 
 <p align="center">
-  <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/IMU-Joystick/schematics/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
+  <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/examples/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
 </p>
 
 # How to build an IMU Joystick yourself
@@ -26,9 +28,9 @@ We assume that you have some wire to make breadboard connections.
 ### 2. Assemble the hardware
 Solder pin headers where needed; Place Pro Micro, GY-521 & wire on breadboard as follows:
 <p align="center">
-  <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/IMU-Joystick/schematics/IMU-Joystick_bb.png" title="Breadboard Assembly" />
+  <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/schematics/IMU-Joystick_bb.png" title="Breadboard Assembly" />
 </p>
-Note that `` `` do not need to connect.
+Note that Pro Micro pins `8` and `9` do not need to connect to the IMU.
 
 ### 3. Get the software components
 - [Arduino IDE (>=1.6.6)](https://www.arduino.cc/en/main/software)
@@ -59,6 +61,10 @@ Do the following steps:
 # How to *develop* the controller yourself
 
 This section lists some tools, that we found useful during development.
+
   - the linux command line tool package `joyutils` allow testing and simple debugging of joysticks, e.g. with `~$ jstest /dev/input/js0`. A graphical version [jstest-gtk](https://github.com/Grumbel/jstest-gtk) is also available.
   - the N64 emulator `mupen64plus` is useful to evaluate gameplay experience. Alternatively, the free game `extremetuxracer` also has Joystick support.
 
+# License
+
+[GNU GPL v3](https://github.com/SimonMaier/MarioKartHelmet/blob/master/LICENSE) except for [README.md](https://github.com/SimonMaier/MarioKartHelmet/blob/master/README.md), which is released as [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/).
