@@ -7,11 +7,13 @@
 
 For tested applications check out the `example`  section. In particular, `examples/MarioKartHelmet/` demonstrates how to set up  IMU-Joystick as a head-mounted game controller for Mario Kart 64 or Mario Kart Double Dash. It allows karts to be controlled through head movements and items triggered via jumping. After a lot of playing, we can assure that it brings a highly immersive game experience to what is already a great party game :tada:.
 
+The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
+
 <p align="center">
   <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/examples/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
 </p>
 
-The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
+
 
 # How to build an IMU Joystick yourself
 
@@ -52,6 +54,7 @@ Install the required libraries and upload the sketch `IMU-Joystick.ino` to your 
 
 We recommend that you play some *Mario Kart 64* with your IMU Joystick used as a head tracker (on ArchLinux).
 Do the following steps:
+  - Step 0: Upload the [MarioKartHelmet](examples/MarioKartHelmet/MarioKartHelmet.ino) sketch
   - Step 1: `~# pacman -S mupen64plus`
   - Step 2: Add controller specification to `/usr/share/mupen64plus/InputAutoCfg.ini` file.
   - Step 3: Legally obtain ROM file for *Mario Kart 64*.
