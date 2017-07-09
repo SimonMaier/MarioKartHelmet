@@ -3,12 +3,12 @@
 
 **An easy-to-build DIY game controller for computers, based on the MPU6050 gyroscope & Arduino Pro Micro.** 
 
-:video_game:
+:video_game:  :video_game:  :video_game:  :video_game:
 
 ## Features
 
 The IMU-Joystick is assembled in less than 15 minutes and costs about €5 (including the breadboard).
-When connected to a computer the board presents itself as a USB joystick. Using the MPU6050, the Pro Micro measures acceleration & rotation data and maps it to joystick behaviour. The number of joystick axes and buttons and the precise mapping can be configured in the Arduino sketches. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
+When connected to a computer the board presents itself as a USB joystick. Using the MPU6050, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The number of joystick axes and buttons and the precise mapping can be configured in the Arduino sketch. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
 
 <p align="center">
   <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/examples/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
@@ -16,9 +16,14 @@ When connected to a computer the board presents itself as a USB joystick. Using 
 
 ## Example Usage
 
-For some simple applications check out the [/examples/](/examples)  folder. 
-  - `examples/MarioKartHelmet/` demonstrates how to configure IMU-Joystick as a head-mounted game controller, intended for *Mario Kart 64* or *Mario Kart Double Dash*. It allows karts to be controlled through head movements and items triggered via jumping. After a lot of playing, we can assure that it brings a immersive game experience to what is already a great party game :tada:.
-  - `examples/BasicHeadTracker` sets up a generic Joystick with 2 axes and a physical calibration button. It works out of the box  with many games. Here you can watch a video of someone collecting 89 herrings in `extremetuxracer`, using an IMU-Joystick with the `BasicHeadTracker` sketch, mounted on a headset:
+For some simple applications check out the [examples](/examples)  folder. 
+  - `examples/MarioKartHelmet` demonstrates how to configure IMU-Joystick as a head-mounted game controller, intended for *Mario Kart 64* or *Mario Kart Double Dash*. It allows karts to be controlled through head movements and items triggered via jumping, by wearing a Toad-ish styrofoam hat with an IMU-Joystick inside. After a lot of playing, we can assure that it brings a immersive game experience to what is already a great party game :tada::
+
+<p align="center">
+  <img src="http://chrisittner.de/frame-052.jpg" title="Mario Kart 64 with IMU-Joystick" width="640" />
+</p>
+  
+  - `examples/BasicHeadTracker` sets up a generic Joystick with 2 axes and a physical calibration button. It works out of the box  with many games. Below you can watch a video of someone using a head-mounted IMU-Joystick with the `BasicHeadTracker` sketch to collect 89 herrings in *Extreme Tux  Racer*:
 
 <p align="center"><a href="https://www.youtube.com/watch?v=GGOQOM26r2M">
   <img src="https://img.youtube.com/vi/GGOQOM26r2M/0.jpg" title="ExtremeTuxRacer with IMU-Joystick video" width="640" />
@@ -43,7 +48,7 @@ Solder pin headers where needed; Place Pro Micro, GY-521 & wire on breadboard as
 <p align="center">
   <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/schematics/IMU-Joystick_bb.png" title="Breadboard Assembly" />
 </p>
-Note that Pro Micro `Pin  8` and `Pin 9` do not need to connect to the MPU6050.
+Note that Pro Micro 8 & 9 do not need to connect to the MPU6050.
 
 ### 3. Get the software
 - [Arduino IDE (>=1.6.6)](https://www.arduino.cc/en/main/software)
