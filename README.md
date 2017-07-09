@@ -1,7 +1,7 @@
 
 # IMU-Joystick
 
-**A configurable DIY USB game controller, based on an Arduino Pro Micro and the MPU6050 accelerometer & gyroscope.** 
+**A configurable DIY game controller, based on an Arduino Pro Micro and the MPU6050 accelerometer & gyroscope.** 
 
 :video_game:
 
