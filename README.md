@@ -7,7 +7,8 @@
 
 For tested applications check out the `example`  section. In particular, `examples/MarioKartHelmet/` demonstrates how to set up  IMU-Joystick as a head-mounted game controller for Mario Kart 64 or Mario Kart Double Dash. It allows karts to be controlled through head movements and items triggered via jumping. After a lot of playing, we can assure that it brings a highly immersive game experience to what is already a great party game :tada:.
 
-The Arduino Pro Micro-based controller can be assembled on a breadcoard within 15 minutes and costs less than 5$ (including the breadboard). When connected to a computer the board presents itself as a USB joystick. Using the MPU6050 sensor, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
+The IMU-Joystick is assembled in less than 15 minutes and costs about €5 (including the breadboard).
+When connected to a computer the board presents itself as a USB joystick. Using the MPU6050, the Pro Micro measures acceleration & rotation data and maps it to joystick behaviour. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
 
 <p align="center">
   <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/examples/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
@@ -15,17 +16,16 @@ The Arduino Pro Micro-based controller can be assembled on a breadcoard within 1
 
 
 
-# How to build an IMU Joystick yourself
+# How to build an IMU-Joystick
 
-You can build your own IMU Joystick in about 1-2h, by following the instructions below. Except for mounting pin headers, no soldering is required.
+You can build your own IMU Joystick in about 1-2h, just follow the instructions below. Except for mounting pin headers, no soldering is required.
 
-### 1. Get the hardware components
+### 1. Get the hardware
   - [Arduino(-compatible) Pro Micro](https://www.aliexpress.com/item/New-Pro-Micro-for-arduino-ATmega32U4-5V-16MHz-Module-with-2-row-pin-header-For-Leonardo/32773740303.html), any ATmega32U4-based Arduino will do.
-  - [GY-521](https://www.aliexpress.com/item/versandkostenfrei-gy-521-mpu-6050-mpu6050-modul-3-achse-analog-Gyro-Sensoren-beschleunigungsmesser-modul/32315092057.html), a low-cost MPU6050 accelerometer + gyroscope.
+  - [MPU6050](https://www.aliexpress.com/item/versandkostenfrei-gy-521-mpu-6050-mpu6050-modul-3-achse-analog-Gyro-Sensoren-beschleunigungsmesser-modul/32315092057.html) (GY-521 breakout), a low-cost accelerometer + gyroscope.
   - mini-sized [breadboard](https://www.aliexpress.com/item/Mini-Breadboard-Protoboard-DIY-Kit-Universal-Transparent-Solderless-SYB-170-Breadboard-170Tie-points-Prototype-Boards-35X47MM/32717999019.html)
   - (optional) [push buttons](https://www.aliexpress.com/item/100pcs-6-6-5mm-4pin-Quality-Mini-Micro-Momentary-Tactile-Push-Button-Switch/32753141267.html)
-
-We assume that you have some wire to make breadboard connections.
+  - some wire to make breadboard connections.
 
 **Total material cost** as of June 2017: €2,72 Pro Micro + €0.93 GY-521 + €0.80 breadboard = **4.45€**, shipping included.
 
@@ -36,7 +36,7 @@ Solder pin headers where needed; Place Pro Micro, GY-521 & wire on breadboard as
 </p>
 Note that Pro Micro pins `8` and `9` do not need to connect to the IMU.
 
-### 3. Get the software components
+### 3. Get the software
 - [Arduino IDE (>=1.6.6)](https://www.arduino.cc/en/main/software)
 - external Arduino libraries:
   - [i2cdevlib](https://github.com/jrowberg/i2cdevlib)
@@ -48,7 +48,7 @@ Note that Pro Micro pins `8` and `9` do not need to connect to the IMU.
     
 ### 4. Upload the software
 
-Install the required libraries and upload the sketch `IMU-Joystick.ino` to your Pro Micro board. If Pro Micro is not a possible  target in your Arduino environment, select Arduino Leonardo instead.
+Install the required libraries and upload the one of the example sketches to your Pro Micro board. Note that you might need to select Arduino Leonardo as a target board, when using the Arduino GUI.
 
 ### 5. Enjoy!
 
@@ -62,7 +62,7 @@ Do the following steps:
   - Step 5: `~# mupen64plus --fullscreen --gfx mupen64plus-video-glide64 <location-of-ROM-file.n64>`
   - Step 6: \o/ Control race cars using your head movements.
 
-# How to *develop* the controller yourself
+# How to *develop* the controller
 
 This section lists some tools, that we found useful during development.
 
@@ -71,4 +71,4 @@ This section lists some tools, that we found useful during development.
 
 # License
 
-[GNU GPL v3](https://github.com/SimonMaier/MarioKartHelmet/blob/master/LICENSE) except for [README.md](https://github.com/SimonMaier/MarioKartHelmet/blob/master/README.md), which is released as [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/).
+[GNU GPL v3](https://github.com/SimonMaier/MarioKartHelmet/blob/master/LICENSE), except for this introduction (`README.md`) which is [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-nc/4.0/80x15.png)](http://creativecommons.org/licenses/by-nc/4.0/).
