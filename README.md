@@ -3,36 +3,36 @@
 
 **An easy-to-build DIY game controller for computers, based on the MPU6050 gyroscope & Arduino Pro Micro.** 
 
-:video_game:  :video_game:  :video_game:  :video_game:
+:video_game:
 
 ## Features
 
-The IMU-Joystick is assembled in less than 15 minutes and costs about €5 (including the breadboard).
-When connected to a computer the board presents itself as a USB joystick. Using the MPU6050, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The number of joystick axes and buttons and the precise mapping can be configured in the Arduino sketch. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
+The IMU-Joystick is assembled in less than 15 minutes and costs about €5.
+When connected to a computer, the board presents itself as a USB joystick. Using the MPU6050, the Arduino measures acceleration & rotation data and maps it to joystick behaviour. The precise mapping of sensor data to joystick axes/buttons can be configured in the Arduino sketch. The controller is automatically detected as a generic joystick device on Linux, Mac, and Windows, without further software:
 
 <p align="center">
   <img src="https://github.com/SimonMaier/MarioKartHelmet/blob/master/examples/demo1-jstest.gif" width="640" title="Joystick Demo using jstest-gtk" />
 </p>
 
-## Example Usage
+## Application Examples
 
-For some simple applications check out the [examples](/examples)  folder. 
-  - `examples/MarioKartHelmet` demonstrates how to configure IMU-Joystick as a head-mounted game controller, intended for *Mario Kart 64* or *Mario Kart Double Dash*. It allows karts to be controlled through head movements and items triggered via jumping, by wearing a Toad-ish styrofoam hat with an IMU-Joystick inside. After a lot of playing, we can assure that it brings a immersive game experience to what is already a great party game :tada::
-
-<p align="center">
-  <img src="http://chrisittner.de/frame-052.jpg" title="Mario Kart 64 with IMU-Joystick" width="640" />
-</p>
-  
-  - `examples/BasicHeadTracker` sets up a generic Joystick with 2 axes and a physical calibration button. It works out of the box  with many games. Below you can watch a video of someone using a head-mounted IMU-Joystick with the `BasicHeadTracker` sketch to collect 89 herrings in *Extreme Tux  Racer*:
+For applications check out the [examples](/examples) folder. 
+  - `examples/BasicHeadTracker` sets up a generic Joystick with 2 axes and a physical calibration button. It works out of the box  with many games. Below you can watch a video of someone using a head-mounted IMU-Joystick with the `BasicHeadTracker` sketch to collect 89 herrings in *Extreme Tux Racer*:
 
 <p align="center"><a href="https://www.youtube.com/watch?v=GGOQOM26r2M">
   <img src="https://img.youtube.com/vi/GGOQOM26r2M/0.jpg" title="ExtremeTuxRacer with IMU-Joystick video" width="640" />
 </a></p>
 
+  - `examples/MarioKartHelmet` demonstrates how to configure IMU-Joystick as a head-mounted game controller, intended for *Mario Kart 64* or *Mario Kart Double Dash*. It allows karts to be controlled through head movements and items triggered via jumping, by wearing a Toad-ish styrofoam hat with an IMU-Joystick inside. After a lot of playing, we can assure that it brings immersive game experience to what is already a great party game :tada:
+
+<p align="center">
+  <img src="http://chrisittner.de/frame-052.jpg" title="Mario Kart 64 with IMU-Joystick" width="640" />
+</p>
+
 
 ## How to build an IMU-Joystick
 
-You can build your own IMU-Joystick in about 1-2h, just follow the instructions below. Except for mounting pin headers, no soldering is required.
+You can put together your own IMU-Joystick in about 1-2h. Except for mounting pin headers, no soldering is required.
 
 ### 1. Get the hardware
   - [Arduino(-compatible) Pro Micro](https://www.aliexpress.com/item/New-Pro-Micro-for-arduino-ATmega32U4-5V-16MHz-Module-with-2-row-pin-header-For-Leonardo/32773740303.html), any ATmega32U4-based Arduino will do.
@@ -55,10 +55,12 @@ Note that Pro Micro 8 & 9 do not need to connect to the MPU6050.
 - external Arduino libraries:
   - [i2cdevlib](https://github.com/jrowberg/i2cdevlib)
     collection (at least [I2Cdev](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/I2Cdev) and [MPU6050](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050)).
+    
     Follow the [installation instructions on the website](https://www.i2cdevlib.com/usage), or copy the folders `i2cdevlib/Arduino/I2Cdev` and `i2cdevlib/Arduino/MPU6050` from the project repository into your Arduino [libraries directory](https://www.arduino.cc/en/hacking/libraries) (`~/Arduino/libraries/` on Linux).
   - [ArduinoJoystickLibrary (>=2.0)](https://github.com/MHeironimus/ArduinoJoystickLibrary)
+  
     Copy the folder `ArduinoJoystickLibrary/Joystick` to your Arduino libraries directory.
-- our Arduino sketches.
+- This repository. Copy any folder from `examples` into your Arduino directory.
     
 ### 4. Upload the software
 
